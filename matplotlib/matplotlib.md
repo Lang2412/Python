@@ -76,6 +76,118 @@ plt.show()
 | 'None'      ,     ' ' | 什么都不画 |
 |         '-.'          | 点划线     |
 
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 创建一个 8 * 6 点（point）的图，并设置分辨率为 80
+plt.figure(figsize=(8,6), dpi=100)
+
+# 创建一个新的 1 * 1 的子图，接下来的图样绘制在其中的第 1 块（也是唯一的一块）
+plt.subplot(111)
+
+X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
+C,S = np.cos(X), np.sin(X)
+
+# 绘制余弦曲线，使用蓝色的、连续的、宽度为 1 （像素）的实线
+plt.plot(X, C, color="blue", linewidth=1.0, linestyle="-")
+
+# 绘制正弦曲线，使用绿色的、连续的、宽度为 1 （像素）的虚线
+plt.plot(X, S, color="green", linewidth=1.0, linestyle=":")
+
+# 设置 x 轴范围
+plt.xlim(-4.0,4.0)
+
+# 设置 x轴 记号
+plt.xticks(np.linspace(-4,4,9,endpoint=True))
+
+# 设置 y 轴范围
+plt.ylim(-1.0,1.0)
+
+# 设置 y轴 记号
+plt.yticks(np.linspace(-1,1,5,endpoint=True))
+
+#保存图片到当前目录下
+plt.savefig("exercice_2.png",dpi=72)
+
+plt.show()
+```
+
+![image-20201028194839932](C:\Users\疯狼\AppData\Roaming\Typora\typora-user-images\image-20201028194839932.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.figure(figsize=(8,5), dpi=80)
+plt.subplot(111)
+
+X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
+C,S = np.cos(X), np.sin(X)
+
+# 绘制余弦曲线，使用蓝色的、连续的、宽度为 1 （像素）的实线
+plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-")
+
+# 绘制正弦曲线，使用绿色的、连续的、宽度为 1 （像素）的虚线
+plt.plot(X, S, color="red", linewidth=2.5, linestyle=":")
+
+# 设置x轴范围
+plt.xlim(X.min()*1.1, X.max()*1.1)
+
+#设置x轴上的标记，并使用字符 π 进行替换
+plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
+       [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
+
+# 设置y轴范围
+plt.ylim(C.min()*1.1,C.max()*1.1)
+
+plt.yticks([-1, 0, +1],
+       [r'$-1$', r'$0$', r'$+1$'])
+
+plt.show()
+```
+
+![image-20201028200149209](C:\Users\疯狼\AppData\Roaming\Typora\typora-user-images\image-20201028200149209.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.figure(figsize=(8,5), dpi=80)
+ax = plt.subplot(111)
+
+ax.spines['right'].set_color('none')      #设置子图右边框为无色
+ax.spines['top'].set_color('none')        #设置子图上边框为无色
+ax.xaxis.set_ticks_position('bottom')     #设置x轴数据显示在底边框上
+ax.spines['bottom'].set_position(('data',0))     #设置子图底边框的位置
+ax.yaxis.set_ticks_position('left')       #设置y轴数据显示左边框上
+ax.spines['left'].set_position(('data',0))       #设置子图左边框的位置
+
+X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
+C,S = np.cos(X), np.sin(X)
+
+#添加label关键字，用来表示图例的名字
+plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-",label="cosine")	
+plt.plot(X, S, color="red", linewidth=2.5, linestyle="-",label="sine")	
+
+
+plt.xlim(X.min()*1.1, X.max()*1.1)
+plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
+       [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
+
+plt.ylim(C.min()*1.1,C.max()*1.1)
+plt.yticks([-1, 0, +1],
+       [r'$-1$', r'$0$', r'$+1$'])
+#添加图例
+plt.legend(loc='upper left', frameon=False)
+
+plt.show()
+```
+
+![image-20201028204650196](C:\Users\疯狼\AppData\Roaming\Typora\typora-user-images\image-20201028204650196.png)
+
+
+
 此外，可以关键字参数来画图，即设置一个data关键字，所有需要的数据直接从data中寻找。
 
 ```python
@@ -123,6 +235,8 @@ plt.show()
 ```
 
 ![image-20201027210452858](C:\Users\疯狼\AppData\Roaming\Typora\typora-user-images\image-20201027210452858.png)
+
+**scatte()函数**：绘制散点图
 
 ### 2.3条形图
 

@@ -1,7 +1,7 @@
 #-*- coding = utf-8 -*-
 #@Time : 2020/10/26 16:00
 #@Author : 冯朗
-#@File ： test1.py
+#@File ： test1-train_test_split().py
 #@Software : PyCharm
 
 import matplotlib.pyplot as plt
@@ -53,6 +53,7 @@ horiz_bars = axes[1].barh(x,y,color='lightblue',align='center')
 axes[0].axhline(0,color='black',linewidth=2)
 axes[1].axvline(0,color='red',linewidth=2)
 '''
+'''
 np.random.seed(19680801)
 
 n_bins = 10
@@ -75,7 +76,38 @@ ax3.hist(x[:, 0], rwidth=0.9)
 ax3.set_title('different sample sizes')
 
 fig.tight_layout()
+'''
+# 创建一个 8 * 6 点（point）的图，并设置分辨率为 80
+fig = plt.figure(figsize=(8,6), dpi=80)
 
+# 创建一个新的 1 * 1 的子图，接下来的图样绘制在其中的第 1 块（也是唯一的一块）
+ax = plt.subplot(1,1,1)
+
+X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
+C,S = np.cos(X), np.sin(X)
+
+# 绘制余弦曲线，使用蓝色的、连续的、宽度为 1 （像素）的实现
+ax.plot(X, C, color="blue", linewidth=1.0, linestyle="-")
+
+# 绘制正弦曲线，使用绿色的、连续的、宽度为 1 （像素）的虚线
+ax.plot(X, S, color="green", linewidth=1.0, linestyle="-")
+
+# 设置横轴的上下限
+xlim(-4.0,4.0)
+
+# 设置横轴记号
+xticks(np.linspace(-4,4,9,endpoint=True))
+
+# 设置纵轴的上下限
+ylim(-1.0,1.0)
+
+# 设置纵轴记号
+yticks(np.linspace(-1,1,5,endpoint=True))
+
+# 以分辨率 72 来保存图片
+savefig("exercice_2.png",dpi=72)
+
+# 在屏幕上显示
 plt.show()
 
 
